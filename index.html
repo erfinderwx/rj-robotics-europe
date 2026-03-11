@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DeepRobotics 欧洲售后技术服务合作伙伴方案 - 全端适配最终版</title>
+    <title>DeepRobotics European Service Partnership Proposal</title>
     <style>
         :root {
             --bg-primary: #0a0a0a;
@@ -15,7 +15,7 @@
             --card-border: rgba(255, 255, 255, 0.1);
         }
 
-        /* 基础样式复位 */
+        /* Base Reset */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { 
             background: var(--bg-primary); 
@@ -26,7 +26,38 @@
             scroll-behavior: smooth;
         }
 
-        /* 响应式容器 */
+        /* Language Toggle Button */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--accent-orange);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 87, 34, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+        .lang-switcher:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255, 87, 34, 0.6);
+        }
+
+        /* Language-specific visibility */
+        [data-lang] { display: none; }
+        body.lang-zh [data-lang="zh"] { display: block; }
+        body.lang-zh span[data-lang="zh"], body.lang-zh b[data-lang="zh"] { display: inline; }
+        
+        body.lang-en [data-lang="en"] { display: block; }
+        body.lang-en span[data-lang="en"], body.lang-en b[data-lang="en"] { display: inline; }
+
+        /* Responsive Container */
         .container {
             width: 100%;
             max-width: 1000px;
@@ -34,7 +65,7 @@
             padding: clamp(15px, 5vw, 40px);
         }
 
-        /* 章节容器 */
+        /* Section Container */
         .section {
             min-height: 80vh;
             display: flex;
@@ -44,7 +75,7 @@
             border-bottom: 1px solid var(--card-border);
         }
 
-        /* 标题样式 */
+        /* Heading Styles */
         h1 { 
             font-size: clamp(2.2rem, 8vw, 4rem); 
             line-height: 1.1; 
@@ -66,7 +97,7 @@
             font-weight: 700;
         }
 
-        /* 封面卡片 */
+        /* Cover Card */
         .cover-card {
             background: var(--accent-orange);
             color: #000;
@@ -81,7 +112,7 @@
             opacity: 0.9;
         }
 
-        /* 栅格布局适配 */
+        /* Grid Layout */
         .grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -110,7 +141,7 @@
 
         .card p { font-size: 0.95rem; opacity: 0.8; }
 
-        /* SLA 模块 */
+        /* SLA Module */
         .sla-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -130,7 +161,7 @@
         .sla-box li { margin-bottom: 10px; font-size: 0.95rem; }
         .sla-box b { color: var(--text-primary); }
 
-        /* 价格模块 */
+        /* Pricing Module */
         .price-val { 
             font-size: clamp(2.5rem, 10vw, 4rem); 
             font-weight: 800; 
@@ -148,7 +179,7 @@
         .featured-card h3 { color: #000; }
         .featured-card li { margin-bottom: 8px; font-weight: 600; list-style: none; }
 
-        /* 步骤模块 */
+        /* Step Module */
         .step-item {
             display: flex;
             gap: 25px;
@@ -167,7 +198,7 @@
             border-bottom: 3px solid var(--accent-orange);
         }
 
-        /* 底部信息 */
+        /* Footer */
         .footer-info {
             margin-top: 40px;
             display: flex;
@@ -176,154 +207,216 @@
             gap: 20px;
         }
 
-        /* 移动端特殊处理 */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .grid { grid-template-columns: 1fr; }
             .section { padding: 60px 0; min-height: auto; }
             .footer-info { flex-direction: column; text-align: center; }
             .step-item { flex-direction: column; text-align: center; gap: 15px; }
+            .lang-switcher { top: 10px; right: 10px; padding: 8px 15px; font-size: 0.75rem; }
         }
     </style>
 </head>
-<body>
+<body class="lang-zh">
+    <button class="lang-switcher" onclick="toggleLang()">English / 中文</button>
+
     <div class="container">
-        <!-- 第1页：封面 -->
+        <!-- Page 1: Cover -->
         <section class="section">
             <div class="cover-card">
                 <div style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.2em; margin-bottom: 15px;">PROPOSAL / 2026</div>
-                <h1>DeepRobotics<br>欧洲本地技术服务<br>合作伙伴方案</h1>
-                <p class="subtitle">懂技术、懂欧洲、懂业务——为您构建务实可靠的欧洲服务支点</p>
+                <h1 data-lang="zh">DeepRobotics<br>欧洲本地技术服务<br>合作伙伴方案</h1>
+                <h1 data-lang="en">DeepRobotics<br>European After-Sales<br>Technical Service Proposal</h1>
+                <p class="subtitle" data-lang="zh">懂技术、懂欧洲、懂业务——为您构建务实可靠的欧洲服务支点</p>
+                <p class="subtitle" data-lang="en">Tech-Savvy, Europe-Local, Business-Minded — Building a Reliable Service Foundation in Europe</p>
             </div>
             <div class="footer-info">
                 <div>
                     <p style="opacity: 0.5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;">Presented By</p>
-                    <p style="font-size: 1.2rem; font-weight: 800;">RJ Tech (王兮)</p>
-                    <p style="opacity: 0.7; font-size: 0.9rem;">机器人解决方案专家 / 德国TU9机械硕士 / 慕尼黑 Ismaning 技术小组</p>
+                    <p style="font-size: 1.2rem; font-weight: 800;" data-lang="zh">RJ Tech (王兮)</p>
+                    <p style="font-size: 1.2rem; font-weight: 800;" data-lang="en">RJ Tech (Xi Wang)</p>
+                    <p style="opacity: 0.7; font-size: 0.9rem;" data-lang="zh">机器人解决方案专家 / 德国TU9机械硕士 / 慕尼黑 Ismaning 技术小组</p>
+                    <p style="opacity: 0.7; font-size: 0.9rem;" data-lang="en">Robotics Solution Expert / M.Sc. Mechanical Engineering, TU9 Germany / Munich Ismaning Tech Group</p>
                 </div>
                 <div style="text-align: right;" class="mobile-text-center">
-                    <p style="opacity: 0.5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;">合作目标</p>
-                    <p style="font-size: 1rem; font-weight: 700; color: var(--accent-orange);">缩短维修周期 / 提升满意度 / 市场反馈</p>
+                    <p style="opacity: 0.5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;" data-lang="zh">合作目标</p>
+                    <p style="opacity: 0.5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;" data-lang="en">Objectives</p>
+                    <p style="font-size: 1rem; font-weight: 700; color: var(--accent-orange);" data-lang="zh">缩短维修周期 / 提升满意度 / 市场反馈</p>
+                    <p style="font-size: 1rem; font-weight: 700; color: var(--accent-orange);" data-lang="en">Shorten Repair Cycles / Enhance Satisfaction / Market Feedback</p>
                 </div>
             </div>
         </section>
 
-        <!-- 第2页：核心优势 -->
+        <!-- Page 2: Core Advantages -->
         <section class="section">
-            <h2>核心优势：硬核背景 + 本地深耕</h2>
+            <h2 data-lang="zh">核心优势：硬核背景 + 本地深耕</h2>
+            <h2 data-lang="en">Core Advantages: Technical Depth + Local Presence</h2>
             <div class="grid">
                 <div class="card">
-                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 专业背景</p>
-                    <h3>机电系统专家</h3>
-                    <p>德国 TU9 机械硕士，深厚的机械动力学底子。能够从底层原理排查硬件故障。</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="zh"># 专业背景</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="en"># Technical Expertise</p>
+                    <h3 data-lang="zh">机电系统专家</h3>
+                    <h3 data-lang="en">Mechatronics Specialist</h3>
+                    <p data-lang="zh">德国 TU9 机械硕士，深厚的机械动力学底子。能够从底层原理排查硬件故障。</p>
+                    <p data-lang="en">M.Sc. in Mechanical Engineering from a German TU9 university with deep dynamics knowledge. Capable of root-cause hardware troubleshooting.</p>
                 </div>
                 <div class="card">
-                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 实战经验</p>
-                    <h3>机器人部署经验</h3>
-                    <p>依托普渡科技等头部机器人企业，有3年以上机器人售后及维护经验，熟悉硬件拆装、日志读取及常见软件排障流程。</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="zh"># 实战经验</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="en"># Hands-on Experience</p>
+                    <h3 data-lang="zh">机器人部署经验</h3>
+                    <h3 data-lang="en">Robot Deployment</h3>
+                    <p data-lang="zh">依托普渡科技等头部机器人企业，有3年以上机器人售后及维护经验，熟悉硬件拆装、日志读取及常见软件排障流程。</p>
+                    <p data-lang="en">3+ years of after-sales experience with leading robot companies. Proficient in hardware assembly, log analysis, and software troubleshooting.</p>
                 </div>
                 <div class="card">
-                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 商务能力</p>
-                    <h3>大客户沟通</h3>
-                    <p>有对接和落地博世、大众、戴姆勒等德企经验，熟悉其业务逻辑与沟通规范，确保专业形象。</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="zh"># 商务能力</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="en"># Business Capability</p>
+                    <h3 data-lang="zh">大客户沟通</h3>
+                    <h3 data-lang="en">Enterprise Communication</h3>
+                    <p data-lang="zh">有对接和落地博世、大众、戴姆勒等德企经验，熟悉其业务逻辑与沟通规范，确保专业形象。</p>
+                    <p data-lang="en">Experience working with Bosch, VW, and Daimler. Familiar with German business logic and professional communication standards.</p>
                 </div>
                 <div class="card">
-                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 地理优势</p>
-                    <h3>慕尼黑辐射区</h3>
-                    <p>办公室位于 Ismaning 工业园区，交通便利可接待客户。提供 3 人技术专家组，为云深处提供“高优先级”响应。</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="zh"># 地理优势</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;" data-lang="en"># Strategic Location</p>
+                    <h3 data-lang="zh">慕尼黑辐射区</h3>
+                    <h3 data-lang="en">Munich Hub</h3>
+                    <p data-lang="zh">办公室位于 Ismaning 工业园区。提供 3 人技术专家组，为云深处提供“高优先级”响应。</p>
+                    <p data-lang="en">Office located in Ismaning Industrial Park. A 3-person expert team providing "High Priority" response for DeepRobotics.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 第3页：服务细则 -->
+        <!-- Page 3: Service Details -->
         <section class="section">
-            <h2>服务细则：专业排障与响应承诺</h2>
+            <h2 data-lang="zh">服务细则：专业排障与响应承诺</h2>
+            <h2 data-lang="en">Service Excellence: Professional SLAs & Protocols</h2>
             <div class="sla-grid">
                 <div class="sla-box">
-                    <h3 style="color: var(--accent-cyan);">分级响应标准</h3>
-                    <ul>
+                    <h3 style="color: var(--accent-cyan);" data-lang="zh">分级响应标准</h3>
+                    <h3 style="color: var(--accent-cyan);" data-lang="en">Response Standards</h3>
+                    <ul data-lang="zh">
                         <li>• <b>P1 (紧急故障):</b> 12小时内介入诊断，周末及节假日可协商提供服务</li>
                         <li>• <b>P2 (常规报修):</b> 24小时内介入处理，工作日全覆盖</li>
                         <li>• <b>P3 (一般咨询):</b> 48小时内答复解决建议</li>
                     </ul>
+                    <ul data-lang="en">
+                        <li>• <b>P1 (Urgent):</b> Initial diagnosis within 12 hours (Weekends/Holidays negotiable)</li>
+                        <li>• <b>P2 (Routine):</b> Intervention within 24 hours (Full weekday coverage)</li>
+                        <li>• <b>P3 (General):</b> Resolution advice within 48 hours</li>
+                    </ul>
                 </div>
                 <div class="sla-box orange">
-                    <h3>维修效率承诺</h3>
-                    <ul>
+                    <h3 data-lang="zh">维修效率承诺</h3>
+                    <h3 data-lang="en">Repair Efficiency</h3>
+                    <ul data-lang="zh">
                         <li>• <b>邮寄模块化维修:</b> 在有现货备件的情况下，收机后 48 小时内完成</li>
                         <li>• <b>现场技术支持:</b> 根据排期，为云深处任务保留“快速插单”权利</li>
                         <li>• <b>深度故障报告:</b> 5 个工作日内提供详细的诊断分析与改进建议</li>
                     </ul>
+                    <ul data-lang="en">
+                        <li>• <b>Modular Repair:</b> Completed within 48 hours of receipt (if parts in stock)</li>
+                        <li>• <b>On-site Support:</b> "Fast-track" priority reserved for DeepRobotics tasks</li>
+                        <li>• <b>Deep Diagnosis:</b> Detailed analysis report provided within 5 business days</li>
+                    </ul>
                 </div>
                 <div class="sla-box white">
-                    <h3 style="color: #ffffff;">标准化作业流程</h3>
-                    <ul>
+                    <h3 style="color: #ffffff;" data-lang="zh">标准化作业流程</h3>
+                    <h3 style="color: #ffffff;" data-lang="en">Standardized Workflow</h3>
+                    <ul data-lang="zh">
                         <li>• <b>售后建档:</b> 每台机器建立全生命周期维保记录，实现售后数据资产化</li>
-                        <li>• <b>双向反馈:</b> 定期汇总欧洲客户的工业/科研真实痛点，辅助总部产品快速迭代</li>
+                        <li>• <b>双向反馈:</b> 定期汇总欧洲客户真实痛点，辅助总部产品快速迭代</li>
                         <li>• <b>备件中心:</b> 在慕尼黑托管安全库存，大幅节省国际物流成本与报关时间</li>
                     </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- 第4页：商业方案 -->
-        <section class="section">
-            <h2>商业方案：务实、灵活、高性价比</h2>
-            <div class="grid">
-                <div class="card" style="justify-content: center; border: 1px solid var(--card-border);">
-                    <h3>按需计费模式</h3>
-                    <p style="opacity: 0.6; margin-bottom: 10px;">适合起步阶段，根据任务量结算</p>
-                    <div class="price-val">€50 <small>/ 小时</small></div>
-                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem;">初创合作优惠价 (原价 €55)</p>
-                </div>
-                <div class="featured-card">
-                    <h3>包月托管方案</h3>
-                    <p style="opacity: 0.7; margin-bottom: 15px;">推荐！深度绑定，确保核心资源优先调配</p>
-                    <div class="price-val">€4,000 <small>/ 月</small></div>
-                    <ul>
-                        <li>✅ 包含每月 80 小时专家工时</li>
-                        <li>✅ 高优先级任务响应</li>
-                        <li>✅ 全能托管 (仓储/文档/报告)</li>
+                    <ul data-lang="en">
+                        <li>• <b>Lifecycle Records:</b> Full maintenance logging for every unit for data capitalization</li>
+                        <li>• <b>Bi-directional Feedback:</b> Regular reports on EU customer pain points to aid HQ R&D</li>
+                        <li>• <b>Spare Parts Hub:</b> Local inventory management in Munich to cut logistics costs</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <!-- 第5页：行动路径 -->
+        <!-- Page 4: Commercial Terms -->
         <section class="section">
-            <h2>行动路径：稳扎稳打开启合作</h2>
+            <h2 data-lang="zh">商业方案：务实、灵活、高性价比</h2>
+            <h2 data-lang="en">Commercial Terms: Pragmatic & Flexible</h2>
+            <div class="grid">
+                <div class="card" style="justify-content: center; border: 1px solid var(--card-border);">
+                    <h3 data-lang="zh">按需计费模式</h3>
+                    <h3 data-lang="en">On-Demand Model</h3>
+                    <p style="opacity: 0.6; margin-bottom: 10px;" data-lang="zh">适合起步阶段，根据任务量结算</p>
+                    <p style="opacity: 0.6; margin-bottom: 10px;" data-lang="en">Ideal for early stages; pay per task</p>
+                    <div class="price-val">€50 <small>/ Hour</small></div>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem;" data-lang="zh">初创合作优惠价 (原价 €55)</p>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem;" data-lang="en">Introductory Rate (Standard €55)</p>
+                </div>
+                <div class="featured-card">
+                    <h3 data-lang="zh">包月托管方案</h3>
+                    <h3 data-lang="en">Retainer Plan</h3>
+                    <p style="opacity: 0.7; margin-bottom: 15px;" data-lang="zh">推荐！深度绑定，确保核心资源优先调配</p>
+                    <p style="opacity: 0.7; margin-bottom: 15px;" data-lang="en">Recommended! Deep integration & priority resource allocation</p>
+                    <div class="price-val">€4,000 <small>/ Month</small></div>
+                    <ul data-lang="zh">
+                        <li>✅ 包含每月 80 小时专家工时</li>
+                        <li>✅ 高优先级任务响应与插单权</li>
+                        <li>✅ 全能托管 (仓储/文档/报告)</li>
+                    </ul>
+                    <ul data-lang="en">
+                        <li>✅ Includes 80 hours of expert labor per month</li>
+                        <li>✅ High-priority response & fast-track intervention</li>
+                        <li>✅ Full Managed Service (Storage/Docs/Reports)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 5: Roadmap -->
+        <section class="section">
+            <h2 data-lang="zh">行动路径：稳扎稳打开启合作</h2>
+            <h2 data-lang="en">Roadmap: A Steady Path to Partnership</h2>
             <div class="step-item">
                 <div class="step-num">A</div>
                 <div>
-                    <h3>寄送机器与备件</h3>
-                    <p>将样机和核心零件寄到慕尼黑 Ismaning 中心，我们在本地把仓库和库存管起来。</p>
+                    <h3 data-lang="zh">寄送机器与备件</h3>
+                    <h3 data-lang="en">Ship Machines & Parts</h3>
+                    <p data-lang="zh">将样机和核心零件寄到慕尼黑 Ismaning 中心，我们在本地把仓库和库存管起来。</p>
+                    <p data-lang="en">Send demo units and core spare parts to our Ismaning center; we set up local inventory management.</p>
                 </div>
             </div>
             <div class="step-item">
                 <div class="step-num">B</div>
                 <div>
-                    <h3>技术对接与标准对齐</h3>
-                    <p>通过实际维修案例进行技术交流和培训，把针对欧洲客户的操作规范和维修标准定下来。</p>
+                    <h3 data-lang="zh">技术对接与标准对齐</h3>
+                    <h3 data-lang="en">Technical Alignment</h3>
+                    <p data-lang="zh">通过实际维修案例进行技术交流，把针对欧洲客户的操作规范和维修标准定下来。</p>
+                    <p data-lang="en">Conduct knowledge transfer via real repair cases to finalize EU-specific maintenance standards.</p>
                 </div>
             </div>
             <div class="step-item">
                 <div class="step-num">C</div>
                 <div>
-                    <h3>开始试运行合作</h3>
-                    <p>全面接手欧洲区的报修任务，每个月给总部发一份服务简报，不断优化配合效率。</p>
+                    <h3 data-lang="zh">开始试运行合作</h3>
+                    <h3 data-lang="en">Pilot Run</h3>
+                    <p data-lang="zh">全面接手欧洲区的报修任务，每个月给总部发一份服务简报，不断优化配合效率。</p>
+                    <p data-lang="en">Full takeover of EU repair tasks with monthly service reports to continuously optimize efficiency.</p>
                 </div>
             </div>
         </section>
 
-        <!-- 第6页：愿景 -->
+        <!-- Page 6: Vision -->
         <section class="section" style="border-bottom: none;">
             <div style="text-align: center;">
                 <p style="color: var(--accent-orange); font-weight: 800; letter-spacing: 0.2em; margin-bottom: 20px;">OUR MISSION</p>
-                <h1>我不仅是您的技术保障<br>更是您在欧洲的业务触角</h1>
+                <h1 data-lang="zh">我不仅是您的技术保障<br>更是您在欧洲的业务触角</h1>
+                <h1 data-lang="en">Not Just Your Technical Shield,<br>But Your Business Bridge in Europe</h1>
                 <div style="width: 80px; height: 4px; background: white; margin: 40px auto;"></div>
-                <p style="font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 800; margin-bottom: 40px;">期待与云深处团队共建欧洲服务基石</p>
+                <p style="font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 800; margin-bottom: 40px;" data-lang="zh">期待与云深处团队共建欧洲服务基石</p>
+                <p style="font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 800; margin-bottom: 40px;" data-lang="en">Building the Foundation for DeepRobotics in Europe</p>
                 
                 <div class="card" style="display: inline-block; min-width: 320px; text-align: left;">
-                    <p>联系人: 王兮 (Xi Wang)</p>
+                    <p data-lang="zh">联系人: 王兮 (Xi Wang)</p>
+                    <p data-lang="en">Contact: Xi Wang</p>
                     <p style="font-size: 1.3rem; color: var(--accent-orange); font-weight: 800; margin-top: 5px;">Email: erfinderwx@gmail.com</p>
                 </div>
                 
@@ -331,5 +424,20 @@
             </div>
         </section>
     </div>
+
+    <script>
+        function toggleLang() {
+            const body = document.body;
+            if (body.classList.contains('lang-zh')) {
+                body.classList.remove('lang-zh');
+                body.classList.add('lang-en');
+                document.documentElement.lang = 'en';
+            } else {
+                body.classList.remove('lang-en');
+                body.classList.add('lang-zh');
+                document.documentElement.lang = 'zh';
+            }
+        }
+    </script>
 </body>
 </html>
