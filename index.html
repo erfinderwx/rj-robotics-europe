@@ -2,367 +2,334 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeepRobotics 欧洲售后技术服务合作伙伴方案 - 诚意修正版</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DeepRobotics 欧洲售后技术服务合作伙伴方案 - 全端适配最终版</title>
     <style>
         :root {
             --bg-primary: #0a0a0a;
-            --card-bg: #FF5722;
+            --accent-orange: #FF5722;
             --accent-cyan: #00d4ff;
             --text-primary: #ffffff;
-            --text-on-card: #0a0a0a;
-            --title-size: clamp(1.8rem, 6vw, 4rem);
-            --h2-size: clamp(1.4rem, 4vw, 2.5rem);
-            --body-size: clamp(0.9rem, 1.8vw, 1.1rem);
-            --slide-padding: clamp(1.5rem, 5vw, 5rem);
+            --text-secondary: rgba(255, 255, 255, 0.7);
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.1);
         }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            background-color: var(--bg-primary);
+        /* 基础样式复位 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { 
+            background: var(--bg-primary); 
             color: var(--text-primary);
-            font-family: 'Space Grotesk', sans-serif;
-            overflow: hidden;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        .slide-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+        /* 响应式容器 */
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: clamp(15px, 5vw, 40px);
         }
 
-        .slide {
-            height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
-            position: relative;
-            padding: var(--slide-padding);
+        /* 章节容器 */
+        .section {
+            min-height: 80vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow: hidden;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            padding: 80px 0;
+            border-bottom: 1px solid var(--card-border);
         }
 
-        h1, .display {
-            font-family: 'Archivo Black', sans-serif;
+        /* 标题样式 */
+        h1 { 
+            font-size: clamp(2.2rem, 8vw, 4rem); 
+            line-height: 1.1; 
+            font-weight: 800; 
+            margin-bottom: 20px;
             text-transform: uppercase;
-            line-height: 1.0;
-            margin-bottom: 0.3em;
+        }
+        h2 { 
+            font-size: clamp(1.6rem, 5vw, 2.2rem); 
+            color: var(--accent-orange); 
+            margin-bottom: 40px; 
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        h3 { 
+            font-size: 1.3rem; 
+            color: var(--accent-orange); 
+            margin-bottom: 12px;
+            font-weight: 700;
         }
 
-        .highlight-card {
-            background-color: var(--card-bg);
-            color: var(--text-on-card);
-            padding: 2.5rem;
+        /* 封面卡片 */
+        .cover-card {
+            background: var(--accent-orange);
+            color: #000;
+            padding: clamp(30px, 8vw, 60px);
             border-radius: 4px;
-            box-shadow: 20px 20px 0px rgba(255, 87, 34, 0.15);
+            box-shadow: 15px 15px 0px rgba(255, 87, 34, 0.15);
+        }
+        .cover-card h1 { color: #000; margin-bottom: 30px; }
+        .subtitle { 
+            font-size: clamp(1.1rem, 3vw, 1.4rem); 
+            font-weight: 700; 
+            opacity: 0.9;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        /* 栅格布局适配 */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 20px;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .slide-number {
-            position: absolute;
-            top: 2rem;
-            left: 2rem;
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 1rem;
-            opacity: 0.3;
-            letter-spacing: 0.2em;
-        }
-
-        .nav-dots {
-            position: fixed;
-            right: 2rem;
-            top: 50%;
-            transform: translateY(-50%);
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 30px;
+            border-radius: 4px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
-            z-index: 100;
+        }
+        
+        .card:hover { 
+            transform: translateY(-10px); 
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--accent-orange);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
-        .dot {
-            width: 8px;
-            height: 8px;
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+        .card p { font-size: 0.95rem; opacity: 0.8; }
 
-        .dot.active {
-            background: var(--card-bg);
-            border-color: var(--card-bg);
-            transform: scale(1.5);
+        /* SLA 模块 */
+        .sla-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
-
-        .grid-item {
-            background: rgba(255,255,255,0.03);
-            padding: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            transition: background 0.3s;
-        }
-
-        .grid-item:hover {
-            background: rgba(255,255,255,0.07);
-        }
-
-        .tag {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border: 1px solid currentColor;
-            border-radius: 100px;
-            text-transform: uppercase;
-            margin-right: 8px;
-        }
-
         .sla-box {
-            border-left: 2px solid var(--accent-cyan);
-            background: rgba(0, 212, 255, 0.05);
-            padding: 1rem;
+            padding: 30px;
+            border-left: 3px solid var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+        }
+        .sla-box.orange { border-color: var(--accent-orange); background: rgba(255, 87, 34, 0.03); }
+        .sla-box.white { border-color: #ffffff; background: rgba(255, 255, 255, 0.03); }
+        
+        .sla-box ul { list-style: none; margin-top: 15px; }
+        .sla-box li { margin-bottom: 10px; font-size: 0.95rem; }
+        .sla-box b { color: var(--text-primary); }
+
+        /* 价格模块 */
+        .price-val { 
+            font-size: clamp(2.5rem, 10vw, 4rem); 
+            font-weight: 800; 
+            margin: 20px 0; 
+        }
+        .price-val small { font-size: 1.2rem; opacity: 0.6; font-weight: 400; }
+        
+        .featured-card {
+            background: var(--accent-orange);
+            color: #000;
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 15px 15px 0px rgba(255, 87, 34, 0.15);
+        }
+        .featured-card h3 { color: #000; }
+        .featured-card li { margin-bottom: 8px; font-weight: 600; list-style: none; }
+
+        /* 步骤模块 */
+        .step-item {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .step-num {
+            min-width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            border-bottom: 3px solid var(--accent-orange);
+        }
+
+        /* 底部信息 */
+        .footer-info {
+            margin-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* 移动端特殊处理 */
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .section { padding: 60px 0; min-height: auto; }
+            .footer-info { flex-direction: column; text-align: center; }
+            .step-item { flex-direction: column; text-align: center; gap: 15px; }
         }
     </style>
 </head>
 <body>
-    <div class="nav-dots" id="dots"></div>
-
-    <div class="slide-container" id="container">
-        <!-- Slide 1: Title -->
-        <section class="slide" id="slide-1">
-            <div class="slide-number">PROPOSAL / 01</div>
-            <div class="reveal">
-                <div class="highlight-card max-w-5xl">
-                    <div class="mb-4"><span class="tag">售后服务方案</span><span class="tag">欧洲本地化</span></div>
-                    <h1 style="font-size: var(--title-size);">DeepRobotics<br>欧洲本地技术服务<br>合作伙伴方案</h1>
-                    <p class="text-2xl font-bold mt-6 opacity-90">懂技术、懂欧洲、懂业务——为您构建务实可靠的欧洲服务支点</p>
+    <div class="container">
+        <!-- 第1页：封面 -->
+        <section class="section">
+            <div class="cover-card">
+                <div style="font-size: 0.8rem; font-weight: 800; letter-spacing: 0.2em; margin-bottom: 15px;">PROPOSAL / 2026</div>
+                <h1>DeepRobotics<br>欧洲本地技术服务<br>合作伙伴方案</h1>
+                <p class="subtitle">懂技术、懂欧洲、懂业务——为您构建务实可靠的欧洲服务支点</p>
+            </div>
+            <div class="footer-info">
+                <div>
+                    <p style="opacity: 0.5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;">Presented By</p>
+                    <p style="font-size: 1.2rem; font-weight: 800;">RJ Tech (王兮)</p>
+                    <p style="opacity: 0.7; font-size: 0.9rem;">机器人解决方案专家 / 德国TU9机械硕士 / 慕尼黑 Ismaning 技术小组</p>
                 </div>
-                <div class="mt-16 flex justify-between items-end max-w-5xl">
-                    <div>
-                        <p class="opacity-50 uppercase text-xs tracking-widest mb-2">Presented By</p>
-                        <p class="text-xl font-bold">RJ Tech (王兮)</p>
-                        <p class="opacity-70">德国TU9机械硕士 / 慕尼黑 - Ismaning 技术小组</p>
-                    </div>
-                    <div class="text-right">
-                        <p class="opacity-50 uppercase text-xs tracking-widest mb-2">合作目标</p>
-                        <p class="text-xl font-bold text-orange-500">缩短维修周期 / 提升客户满意度 / 收集市场反馈</p>
-                    </div>
+                <div style="text-align: right;" class="mobile-text-center">
+                    <p style="opacity: 0.5; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;">合作目标</p>
+                    <p style="font-size: 1rem; font-weight: 700; color: var(--accent-orange);">缩短维修周期 / 提升满意度 / 市场反馈</p>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 2: Team (Realistic) -->
-        <section class="slide" id="slide-2">
-            <div class="slide-number">TEAM & EDGE / 02</div>
-            <div class="reveal">
-                <h2 class="display" style="font-size: var(--h2-size);">核心优势：硬核背景 + 本地深耕</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
-                    <div class="grid-item">
-                        <p class="text-orange-500 text-sm font-bold mb-3"># 专业背景</p>
-                        <h4 class="text-lg font-bold mb-2">机电系统专家</h4>
-                        <p class="text-sm opacity-70">德国 TU9 机械硕士，深厚的机械动力学底子。能够从底层原理排查硬件故障。</p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="text-orange-500 text-sm font-bold mb-3"># 实战经验</p>
-                        <h4 class="text-lg font-bold mb-2">机器人部署经验</h4>
-                        <p class="text-sm opacity-70">依托普渡科技等头部机器人企业，有3年以上机器人售后及维护经验，熟悉硬件拆装、日志读取及常见软件排障流程。</p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="text-orange-500 text-sm font-bold mb-3"># 商务能力</p>
-                        <h4 class="text-lg font-bold mb-2">大客户沟通</h4>
-                        <p class="text-sm opacity-70">有对接和落地博世、大众、戴姆勒等德企经验，熟悉其业务逻辑与沟通规范，确保专业形象。</p>
-                    </div>
-                    <div class="grid-item">
-                        <p class="text-orange-500 text-sm font-bold mb-3"># 地理优势</p>
-                        <h4 class="text-lg font-bold mb-2">慕尼黑辐射区</h4>
-                        <p class="text-sm opacity-70">办公室位于 Ismaning 工业园区。可作为云深处在德国乃至欧洲的服务哨所。</p>
-                    </div>
+        <!-- 第2页：核心优势 -->
+        <section class="section">
+            <h2>核心优势：硬核背景 + 本地深耕</h2>
+            <div class="grid">
+                <div class="card">
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 专业背景</p>
+                    <h3>机电系统专家</h3>
+                    <p>德国 TU9 机械硕士，深厚的机械动力学底子。能够从底层原理排查硬件故障。</p>
                 </div>
-                <p class="mt-8 text-cyan-400 font-bold">📍 团队支持：3人技术专家组，通过工时统筹，为云深处业务提供“高优先级”响应。</p>
-            </div>
-        </section>
-
-        <!-- Slide 3: Service Details (No jargon) -->
-        <section class="slide" id="slide-3">
-            <div class="slide-number">SERVICE DETAILS / 03</div>
-            <div class="reveal">
-                <h2 class="display" style="font-size: var(--h2-size);">服务细则：专业排障与响应承诺</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mt-8">
-                    <div class="space-y-6">
-                        <div class="sla-box">
-                            <h4 class="font-bold text-cyan-400 mb-1">分级响应标准</h4>
-                            <ul class="text-sm space-y-2 opacity-80">
-                                <li>• <b>P1 (紧急故障):</b> 12小时内介入诊断，周末及节假日可协商提供服务</li>
-                                <li>• <b>P2 (常规报修):</b> 24小时内介入处理，工作日全覆盖</li>
-                                <li>• <b>P3 (一般咨询):</b> 48小时内答复解决建议</li>
-                            </ul>
-                        </div>
-                        <div class="sla-box" style="border-color: var(--card-bg); background: rgba(255,87,34,0.05);">
-                            <h4 class="font-bold text-orange-500 mb-1">维修效率承诺</h4>
-                            <ul class="text-sm space-y-2 opacity-80">
-                                <li>• <b>邮寄模块化维修:</b> 在有现货备件的情况下，收机后 48 小时内完成</li>
-                                <li>• <b>现场技术支持:</b> 根据排期，为云深处任务保留“快速插单”权利</li>
-                                <li>• <b>深度故障报告:</b> 5 个工作日内提供详细的诊断分析与改进建议</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="bg-white/5 p-6 rounded">
-                        <h4 class="font-bold mb-4">标准化作业流程</h4>
-                        <div class="space-y-4 text-sm">
-                            <div class="flex gap-4">
-                                <span class="text-orange-500 font-bold">01</span>
-                                <p><b>售后建档：</b> 每台机器建立全生命周期维保记录，实现售后数据资产化。</p>
-                            </div>
-                            <div class="flex gap-4">
-                                <span class="text-orange-500 font-bold">02</span>
-                                <p><b>双向反馈：</b> 定期汇总欧洲客户的工业/科研真实痛点，辅助总部产品快速迭代。</p>
-                            </div>
-                            <div class="flex gap-4">
-                                <span class="text-orange-500 font-bold">03</span>
-                                <p><b>备件中心：</b> 在慕尼黑托管安全库存，大幅节省国际物流成本与报关时间。</p>
-                            </div>
-                        </div>
-                    </div>
+                <div class="card">
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 实战经验</p>
+                    <h3>机器人部署经验</h3>
+                    <p>依托普渡科技等头部机器人企业，有3年以上机器人售后及维护经验，熟悉硬件拆装、日志读取及常见软件排障流程。</p>
+                </div>
+                <div class="card">
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 商务能力</p>
+                    <h3>大客户沟通</h3>
+                    <p>有对接和落地博世、大众、戴姆勒等德企经验，熟悉其业务逻辑与沟通规范，确保专业形象。</p>
+                </div>
+                <div class="card">
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem; margin-bottom: 10px;"># 地理优势</p>
+                    <h3>慕尼黑辐射区</h3>
+                    <p>办公室位于 Ismaning 工业园区，交通便利可接待客户。提供 3 人技术专家组，为云深处提供“高优先级”响应。</p>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 4: Retainer Plan -->
-        <section class="slide" id="slide-4">
-            <div class="slide-number">PRICING / 04</div>
-            <div class="reveal">
-                <h2 class="display" style="font-size: var(--h2-size);">商业方案：务实、灵活、高性价比</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
-                    <div class="border border-white/10 p-8 flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">按需计费模式</h3>
-                            <p class="text-sm opacity-60 mb-6">适合起步阶段，根据单次任务量结算。</p>
-                            <p class="text-4xl font-bold">€50 <span class="text-sm opacity-50">/ 小时</span></p>
-                            <p class="text-xs text-orange-500 mt-2 font-bold">初创合作优惠价 (原价 €55)</p>
-                        </div>
-                        <ul class="mt-8 text-sm space-y-2 opacity-80">
-                            <li>• 适合不确定的临时维保任务</li>
-                            <li>• 差旅及路途费用按实报实销标准结算</li>
-                        </ul>
-                    </div>
-                    <div class="highlight-card flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-xl font-bold mb-2">包月托管方案</h3>
-                            <p class="text-sm text-black/60 mb-6">推荐！深度绑定，确保核心资源的优先调配。</p>
-                            <p class="text-4xl font-bold">€4,000 <span class="text-sm text-black/50">/ 月</span></p>
-                            <p class="text-xs bg-black text-white px-2 py-1 inline-block mt-2">包含每月 80 小时专家工时</p>
-                        </div>
-                        <div class="mt-8">
-                            <h4 class="font-bold text-sm mb-2">方案价值：</h4>
-                            <ul class="text-sm space-y-1 font-medium">
-                                <li>✅ <b>高优先级：</b> 专人随时对接，任务插单响应</li>
-                                <li>✅ <b>全能托管：</b> 包含仓储整理、文档翻译、技术报告</li>
-                                <li>✅ <b>预算固定：</b> 简化每月的结算报销流程</li>
-                            </ul>
-                        </div>
-                    </div>
+        <!-- 第3页：服务细则 -->
+        <section class="section">
+            <h2>服务细则：专业排障与响应承诺</h2>
+            <div class="sla-grid">
+                <div class="sla-box">
+                    <h3 style="color: var(--accent-cyan);">分级响应标准</h3>
+                    <ul>
+                        <li>• <b>P1 (紧急故障):</b> 12小时内介入诊断，周末及节假日可协商提供服务</li>
+                        <li>• <b>P2 (常规报修):</b> 24小时内介入处理，工作日全覆盖</li>
+                        <li>• <b>P3 (一般咨询):</b> 48小时内答复解决建议</li>
+                    </ul>
+                </div>
+                <div class="sla-box orange">
+                    <h3>维修效率承诺</h3>
+                    <ul>
+                        <li>• <b>邮寄模块化维修:</b> 在有现货备件的情况下，收机后 48 小时内完成</li>
+                        <li>• <b>现场技术支持:</b> 根据排期，为云深处任务保留“快速插单”权利</li>
+                        <li>• <b>深度故障报告:</b> 5 个工作日内提供详细的诊断分析与改进建议</li>
+                    </ul>
+                </div>
+                <div class="sla-box white">
+                    <h3 style="color: #ffffff;">标准化作业流程</h3>
+                    <ul>
+                        <li>• <b>售后建档:</b> 每台机器建立全生命周期维保记录，实现售后数据资产化</li>
+                        <li>• <b>双向反馈:</b> 定期汇总欧洲客户的工业/科研真实痛点，辅助总部产品快速迭代</li>
+                        <li>• <b>备件中心:</b> 在慕尼黑托管安全库存，大幅节省国际物流成本与报关时间</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 5: Roadmap -->
-        <section class="slide" id="slide-5">
-            <div class="slide-number">NEXT STEPS / 05</div>
-            <div class="reveal">
-                <h2 class="display" style="font-size: var(--h2-size);">行动路径：稳扎稳打开启合作</h2>
-                <div class="mt-12 space-y-8">
-                    <div class="flex items-center gap-8">
-                        <div class="w-16 h-16 bg-white/10 flex items-center justify-center font-bold text-2xl border-b-2 border-orange-500">A</div>
-                        <div>
-                            <h4 class="text-xl font-bold">资源对齐与样机部署</h4>
-                            <p class="opacity-70">样机及核心备件寄送至 Ismaning 中心，建立初步的安全库存监控流程。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-8">
-                        <div class="w-16 h-16 bg-white/10 flex items-center justify-center font-bold text-2xl border-b-2 border-orange-500">B</div>
-                        <div>
-                            <h4 class="text-xl font-bold">技术交底与标准建立</h4>
-                            <p class="opacity-70">通过实际案例进行远程技术交底，共同完善符合欧洲习惯的售后操作规范。</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-8">
-                        <div class="w-16 h-16 bg-white/10 flex items-center justify-center font-bold text-2xl border-b-2 border-orange-500">C</div>
-                        <div>
-                            <h4 class="text-xl font-bold">开启优惠测试期</h4>
-                            <p class="opacity-70">全面承接欧洲区报修，按月输出服务简报，动态调整合作细节以达到最佳效率。</p>
-                        </div>
-                    </div>
+        <!-- 第4页：商业方案 -->
+        <section class="section">
+            <h2>商业方案：务实、灵活、高性价比</h2>
+            <div class="grid">
+                <div class="card" style="justify-content: center; border: 1px solid var(--card-border);">
+                    <h3>按需计费模式</h3>
+                    <p style="opacity: 0.6; margin-bottom: 10px;">适合起步阶段，根据任务量结算</p>
+                    <div class="price-val">€50 <small>/ 小时</small></div>
+                    <p style="color: var(--accent-orange); font-weight: 800; font-size: 0.8rem;">初创合作优惠价 (原价 €55)</p>
+                </div>
+                <div class="featured-card">
+                    <h3>包月托管方案</h3>
+                    <p style="opacity: 0.7; margin-bottom: 15px;">推荐！深度绑定，确保核心资源优先调配</p>
+                    <div class="price-val">€4,000 <small>/ 月</small></div>
+                    <ul>
+                        <li>✅ 包含每月 80 小时专家工时</li>
+                        <li>✅ 高优先级任务响应</li>
+                        <li>✅ 全能托管 (仓储/文档/报告)</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <!-- Slide 6: Vision -->
-        <section class="slide" id="slide-6">
-            <div class="slide-number">VISION / 06</div>
-            <div class="reveal text-center">
-                <p class="text-orange-500 font-bold tracking-widest mb-4">OUR MISSION</p>
-                <h2 class="display" style="font-size: var(--h2-size);">我不仅是您的技术保障<br>更是您在欧洲的业务触角</h2>
-                <div class="w-24 h-1 bg-white mx-auto my-12"></div>
-                <div class="space-y-4">
-                    <p class="text-2xl font-bold">期待与云深处团队共建欧洲服务基石</p>
-                    <p class="text-xl opacity-70">联系人: 王兮 (Xi Wang)</p>
-                    <p class="text-xl text-cyan-400 font-bold">Email: erfinderwx@gmail.com</p>
+        <!-- 第5页：行动路径 -->
+        <section class="section">
+            <h2>行动路径：稳扎稳打开启合作</h2>
+            <div class="step-item">
+                <div class="step-num">A</div>
+                <div>
+                    <h3>寄送机器与备件</h3>
+                    <p>将样机和核心零件寄到慕尼黑 Ismaning 中心，我们在本地把仓库和库存管起来。</p>
                 </div>
-                <div class="mt-24 opacity-30 text-xs">
-                    <p>© 2026 RJ Tech. All rights reserved.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-num">B</div>
+                <div>
+                    <h3>技术对接与标准对齐</h3>
+                    <p>通过实际维修案例进行技术交流和培训，把针对欧洲客户的操作规范和维修标准定下来。</p>
                 </div>
+            </div>
+            <div class="step-item">
+                <div class="step-num">C</div>
+                <div>
+                    <h3>开始试运行合作</h3>
+                    <p>全面接手欧洲区的报修任务，每个月给总部发一份服务简报，不断优化配合效率。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 第6页：愿景 -->
+        <section class="section" style="border-bottom: none;">
+            <div style="text-align: center;">
+                <p style="color: var(--accent-orange); font-weight: 800; letter-spacing: 0.2em; margin-bottom: 20px;">OUR MISSION</p>
+                <h1>我不仅是您的技术保障<br>更是您在欧洲的业务触角</h1>
+                <div style="width: 80px; height: 4px; background: white; margin: 40px auto;"></div>
+                <p style="font-size: clamp(1.2rem, 4vw, 1.8rem); font-weight: 800; margin-bottom: 40px;">期待与云深处团队共建欧洲服务基石</p>
+                
+                <div class="card" style="display: inline-block; min-width: 320px; text-align: left;">
+                    <p>联系人: 王兮 (Xi Wang)</p>
+                    <p style="font-size: 1.3rem; color: var(--accent-orange); font-weight: 800; margin-top: 5px;">Email: erfinderwx@gmail.com</p>
+                </div>
+                
+                <p style="margin-top: 80px; opacity: 0.3; font-size: 0.7rem;">© 2026 RJ Tech. All rights reserved.</p>
             </div>
         </section>
     </div>
-
-    <script>
-        const container = document.getElementById('container');
-        const slides = document.querySelectorAll('.slide');
-        const dotsContainer = document.getElementById('dots');
-
-        slides.forEach((_, i) => {
-            const dot = document.createElement('div');
-            dot.className = 'dot' + (i === 0 ? ' active' : '');
-            dot.onclick = () => {
-                container.scrollTo({ top: i * window.innerHeight, behavior: 'smooth' });
-            };
-            dotsContainer.appendChild(dot);
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelector('.reveal').classList.add('visible');
-                    const index = Array.from(slides).indexOf(entry.target);
-                    document.querySelectorAll('.dot').forEach((dot, i) => {
-                        dot.classList.toggle('active', i === index);
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
-
-        slides.forEach(slide => observer.observe(slide));
-
-        window.addEventListener('keydown', (e) => {
-            const index = Math.round(container.scrollTop / window.innerHeight);
-            if (e.key === 'ArrowDown' || e.key === ' ') {
-                if (index < slides.length - 1) container.scrollTo({ top: (index + 1) * window.innerHeight, behavior: 'smooth' });
-            } else if (e.key === 'ArrowUp') {
-                if (index > 0) container.scrollTo({ top: (index - 1) * window.innerHeight, behavior: 'smooth' });
-            }
-        });
-    </script>
 </body>
 </html>
